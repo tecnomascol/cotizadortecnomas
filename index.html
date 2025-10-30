@@ -3,96 +3,145 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tecno+ | Cotiza tu iPhone</title>
-  <meta name="description" content="Consulta precios, arma tu cotización y envíala por WhatsApp con Tecno+." />
+  <title>Tecno+ | Arma tu cotización</title>
+  <meta name="description" content="Landing Tecno+ para armar cotización: precios por medio de pago y envío por WhatsApp." />
   <style>
-    :root{ --negro:#0b0b0b;--negro-2:#141414;--gris:#202020;--borde:#2a2a2a;--blanco:#fff;--texto:#e6e6e6;--muted:#bdbdbd;--rojo:#e60000;--rojo-2:#b00000;--ok:#2ecc71 }
+    :root{
+      --negro:#0b0b0b; --negro-2:#141414; --gris:#101010; --borde:#222;
+      --blanco:#fff; --texto:#e6e6e6; --muted:#bdbdbd;
+      --rojo:#e60000; --rojo-2:#b00000; --ok:#2ecc71;
+    }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0}
-    body{font-family:system-ui,-apple-system,"Poppins",Roboto,Arial,sans-serif;background:linear-gradient(180deg,var(--negro),#000);color:var(--texto)}
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-    .container{max-width:1140px;margin:auto;padding:0 16px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border-radius:10px;padding:.65rem 1rem;font-weight:700;text-decoration:none;cursor:pointer;border:1px solid transparent;transition:.2s ease;user-select:none}
-    .btn.primary{background:var(--rojo);color:var(--blanco)}.btn.primary:hover{background:var(--rojo-2);transform:translateY(-1px)}
-    .btn.ghost{background:transparent;color:var(--blanco);border-color:var(--borde)}.btn.ghost:hover{border-color:var(--rojo);color:var(--blanco)}
-    .btn.xl{padding:1rem 1.4rem;font-size:1.05rem}
-    .navbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:rgba(0,0,0,.75);backdrop-filter:blur(10px);border-bottom:1px solid var(--borde)}
+    body{
+      font-family:system-ui,-apple-system,Roboto,Arial,sans-serif;
+      background:#000;
+      color:var(--texto);
+      line-height:1.45;
+    }
+    .container{max-width:1200px;margin:auto;padding:0 16px}
+
+    /* NAV */
+    .navbar{
+      position:sticky;top:0;z-index:30;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:10px 16px;
+      background:rgba(0,0,0,.85);backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--borde);
+    }
     .brand{display:flex;align-items:center;gap:.6rem}
-    .brand-logo{width:36px;height:36px;border-radius:10px;background:radial-gradient(70% 60% at 50% 40%, rgba(230,0,0,.3), transparent 60%),linear-gradient(135deg,#1a1a1a,#0c0c0c);display:grid;place-items:center;font-weight:800;color:#fff}
-    .brand-text{font-size:1.2rem;color:var(--blanco)}.accent{color:var(--rojo)}
-    .actions{display:flex;gap:.6rem}
-    .hero{display:grid;place-items:center;min-height:48vh;background:radial-gradient(70% 60% at 50% 40%, rgba(230,0,0,.18), transparent 60%),radial-gradient(40% 40% at 80% 10%, rgba(255,255,255,.06), transparent 60%);border-bottom:1px solid var(--borde)}
-    .hero-inner{text-align:center;max-width:800px;padding:3rem 1rem;animation:fadeUp .9s ease both}
-    .hero h1{font-size:clamp(28px,4vw,44px);margin:0 0 .6rem}
-    .hero p{opacity:.9;margin:0 0 1.2rem}
-    h2{color:var(--blanco);font-size:1.4rem;margin:22px 0}
+    .brand-logo{
+      width:36px;height:36px;border-radius:10px;
+      background:radial-gradient(70% 60% at 50% 40%, rgba(230,0,0,.3), transparent 60%),linear-gradient(135deg,#1a1a1a,#0c0c0c);
+      display:grid;place-items:center;
+      font-weight:800;color:#fff;
+    }
+    .brand-text{font-size:1.2rem;color:var(--blanco)}
+    .accent{color:var(--rojo)}
+    .actions{display:flex;gap:.6rem;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+      border-radius:10px;padding:.55rem .9rem;
+      font-weight:700;text-decoration:none;cursor:pointer;
+      border:1px solid transparent;transition:.2s ease;user-select:none
+    }
+    .btn.primary{background:var(--rojo);color:var(--blanco)}
+    .btn.primary:hover{background:var(--rojo-2);transform:translateY(-1px)}
+    .btn.ghost{background:transparent;color:var(--blanco);border-color:var(--borde)}
+    .btn.ghost:hover{border-color:var(--rojo)}
+    .btn.xl{padding:.85rem 1.2rem;font-size:1.02rem}
+
+    /* CONTROLES */
     .controls{border-bottom:1px solid var(--borde);background:var(--negro-2)}
-    .controls .container{display:grid;grid-template-columns:1fr 220px 180px;gap:12px;padding:14px 16px}
+    .controls .container{
+      display:grid;grid-template-columns:1fr 170px 170px;gap:12px;
+      padding:12px 16px
+    }
     .control{display:flex;flex-direction:column;gap:6px}
     .control label{font-size:.85rem;color:var(--muted)}
-    .control input,.control select{background:var(--gris);color:var(--blanco);border:1px solid var(--borde);border-radius:10px;padding:.65rem .75rem;outline:none}
-    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
-    .card{background:var(--gris);border:1px solid var(--borde);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:.2s ease}
-    .card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,.25)}
-    .img-wrap{aspect-ratio:1/1;background:#0f0f0f;display:grid;place-items:center}
-    .card img{max-width:90%;max-height:90%;object-fit:contain;filter:drop-shadow(0 12px 30px rgba(0,0,0,.5))}
-    .card .body{padding:12px 12px 14px;display:flex;flex-direction:column;gap:8px}
-    .name{font-weight:700;color:var(--blanco);min-height:42px}
-    .meta{font-size:.85rem;color:#cfcfcf;display:flex;gap:8px;flex-wrap:wrap}
-    .badge{display:inline-flex;align-items:center;gap:6px;background:#121212;border:1px solid var(--borde);padding:4px 8px;border-radius:999px}
-    .badge.red{border-color:var(--rojo);color:#ffd7d7}
-    .price{color:#ffdede;font-weight:800}
-    .row{display:flex;align-items:center;justify-content:space-between;gap:8px}
-    .qty{display:flex;align-items:center;gap:6px}
-    .qty input{width:64px;background:#121212;color:var(--blanco);border:1px solid var(--borde);border-radius:10px;padding:.5rem;text-align:center}
-    .actions{display:flex;gap:8px;margin-top:6px}
-    .quote{padding:26px 0;border-top:1px solid var(--borde);background:#0a0a0a}
-    .quote-card{background:var(--gris);border:1px solid var(--borde);border-radius:16px;padding:12px}
-    .quote-empty{padding:22px;text-align:center;color:#cfcfcf}
+    .control input,.control select{
+      background:#151515;color:#fff;border:1px solid var(--borde);
+      border-radius:10px;padding:.55rem .7rem;outline:none
+    }
+
+    /* TABLA */
+    .table-wrap{padding:14px 0}
+    .table-scroll{
+      overflow:auto;border:1px solid var(--borde);border-radius:14px;background:#0c0c0c;
+    }
+    table{
+      width:100%;border-collapse:separate;border-spacing:0;
+      background:var(--gris);color:var(--texto);
+      min-width:1130px;
+    }
+    thead th{
+      position:sticky;top:0;background:#121212;border-bottom:1px solid var(--borde);
+      font-size:.86rem;text-align:left;padding:10px;color:#fff
+    }
+    tbody td{border-bottom:1px solid #1e1e1e;padding:10px;font-size:.92rem}
+    tbody tr:hover{background:#161616}
+    .th-right,.td-right{text-align:right}
+    .pill{
+      display:inline-block;padding:2px 8px;border-radius:999px;
+      border:1px solid var(--borde);background:#161616;font-size:.8rem
+    }
+    .pill.red{border-color:var(--rojo);color:#ffd7d7}
+    .muted{color:#c9c9c9}
+    .na{color:#777;font-style:italic}
+
+    /* COTIZACIÓN */
+    .quote{padding:20px 0;border-top:1px solid var(--borde);background:#0a0a0a}
+    .quote-card{background:#111;border:1px solid var(--borde);border-radius:16px;padding:12px}
+    .quote-empty{padding:18px;text-align:center;color:#cfcfcf}
     .quote-items{display:flex;flex-direction:column;gap:8px}
-    .item{display:grid;grid-template-columns:1fr 90px 120px 120px;gap:10px;align-items:center;background:#121212;border:1px solid var(--borde);border-radius:12px;padding:10px}
+    .item{
+      display:grid;grid-template-columns:1fr 80px 120px 140px;
+      gap:10px;align-items:center;background:#121212;
+      border:1px solid var(--borde);border-radius:12px;padding:10px
+    }
     .item .name{font-weight:700}
-    .item .muted{color:#cfcfcf;font-size:.85rem}
     .item .right{text-align:right}
     .item .rm{cursor:pointer;color:#ffb0b0}
     .item .rm:hover{color:#ff6b6b}
     .quote-total{margin-top:12px;border-top:1px dashed var(--borde);padding-top:10px}
     .quote-total .row{display:flex;justify-content:space-between;align-items:center}
     .note{color:#cfcfcf;font-size:.85rem;margin:.5rem 0 0}
-    .footer{border-top:1px solid var(--borde);padding:18px 0;background:#000;color:#bdbdbd}
-    @media (max-width:900px){.controls .container{grid-template-columns:1fr 1fr;gap:10px}}
-    @media (max-width:640px){.controls .container{grid-template-columns:1fr}.item{grid-template-columns:1fr 70px 100px 70px}}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-    .hero{display:none}
-    .img-wrap{display:none}
+
+    /* FOOTER */
+    .footer{border-top:1px solid var(--borde);padding:16px 0;background:#000;color:#bdbdbd}
+
+    /* RESPONSIVE */
+    @media (max-width:900px){
+      .controls .container{grid-template-columns:1fr 1fr}
+      .navbar{flex-wrap:wrap;gap:10px}
+      .actions{width:100%;justify-content:flex-end}
+    }
+    @media (max-width:640px){
+      .controls .container{grid-template-columns:1fr}
+      .item{grid-template-columns:1fr 70px 100px 90px}
+      .actions{justify-content:flex-start}
+    }
   </style>
 </head>
 <body>
+  <!-- NAV -->
   <header class="navbar">
     <div class="brand">
       <div class="brand-logo">T+</div>
       <span class="brand-text"><strong class="accent">Tecno</strong>+</span>
     </div>
     <nav class="actions">
-      <a href="#catalogo" class="btn ghost">Inventario</a>
+      <a href="#inventario" class="btn ghost">Inventario</a>
       <a href="#cotizacion" class="btn primary">Ver cotización</a>
     </nav>
   </header>
 
+  <!-- CONTROLES -->
   <section class="controls" aria-label="Controles del inventario">
     <div class="container">
       <div class="control">
         <label for="buscador">Buscar modelo</label>
         <input id="buscador" type="search" placeholder="Ej. iPhone 13, Pro Max, 128GB…" />
-      </div>
-      <div class="control">
-        <label for="medioPago">Medio de pago</label>
-        <select id="medioPago">
-          <option value="contado">Contado</option>
-          <option value="addi">Addis</option>
-          <option value="sistecredito">Sistecredito</option>
-          <option value="banco">Banco de Bogotá</option>
-        </select>
       </div>
       <div class="control">
         <label for="filtroEstado">Condición</label>
@@ -102,26 +151,75 @@
           <option value="semi-nuevo">Semi-nuevo</option>
         </select>
       </div>
+      <div class="control">
+        <label for="orden">Ordenar</label>
+        <select id="orden">
+          <option value="alpha">A → Z</option>
+          <option value="precio">Precio Contado</option>
+        </select>
+      </div>
     </div>
   </section>
 
-  <main id="catalogo" class="container" aria-live="polite">
-    <h2>Inventario Tecno+ (arma tu cotización)</h2>
-    <div id="gridProductos" class="grid"></div>
+  <!-- TABLA INVENTARIO -->
+  <main id="inventario" class="container" aria-live="polite">
+    <h2 style="margin:14px 0 8px">Inventario Tecno+ (arma tu cotización)</h2>
+    <div class="table-wrap">
+      <div class="table-scroll">
+        <table aria-describedby="legend">
+          <thead>
+            <tr>
+              <th>Equipo</th>
+              <th>Condición</th>
+              <th class="th-right">Contado</th>
+              <th class="th-right">Addis</th>
+              <th class="th-right">Sistecredito</th>
+              <th class="th-right">Brilla</th>
+              <th class="th-right">Banco de Bogotá</th>
+              <th class="th-right">Cant.</th>
+              <th>Medio de pago</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <p id="legend" class="muted" style="margin:8px 4px 0">
+        Todos los equipos pueden cotizarse con: <strong>Contado</strong>, <strong>Addis</strong>, <strong>Sistecredito</strong>, <strong>Brilla</strong> y <strong>Banco de Bogotá</strong>.
+      </p>
+    </div>
   </main>
 
+  <!-- COTIZACIÓN -->
   <aside id="cotizacion" class="quote">
     <div class="container">
-      <h2>Tu cotización</h2>
+      <h2>Cotización</h2>
       <div id="resumen" class="quote-card">
         <div class="quote-empty" id="quoteEmpty">Aún no has agregado productos.</div>
         <div class="quote-items" id="quoteItems" hidden></div>
         <div class="quote-total" id="quoteTotal" hidden>
           <div class="row"><span>Total</span><strong id="montoTotal">$0</strong></div>
-          <p class="note">*Precios según <span id="medioPagoBadge">Contado</span>. Puedes cambiar el medio de pago arriba.</p>
+          <p class="note">Cada ítem usa el precio según el medio elegido.</p>
+        </div>
+        <!-- parte de pago -->
+        <div id="tradeinBox" style="margin-top:14px;display:grid;gap:8px;background:#0f0f0f;border:1px solid var(--borde);border-radius:12px;padding:10px 10px 6px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+            <strong>Celular tomado en parte de pago</strong>
+            <small class="muted">(Opcional · ingresa el valor a descontar)</small>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <input id="tradeDesc" type="text" placeholder="Ej. iPhone 11 64GB usado"
+              style="flex:1;min-width:160px;background:#151515;color:#fff;border:1px solid var(--borde);border-radius:8px;padding:.45rem .6rem" />
+            <input id="tradeValue" type="number" min="0" step="10000" placeholder="Valor a descontar"
+              style="width:170px;background:#151515;color:#fff;border:1px solid var(--borde);border-radius:8px;padding:.45rem .6rem" />
+          </div>
+          <div class="row" style="margin-top:4px">
+            <span>Total neto a pagar</span>
+            <strong id="montoNeto">$0</strong>
+          </div>
         </div>
       </div>
-      <div class="quote-actions" style="margin-top:10px;display:flex;gap:8px">
+      <div class="quote-actions" style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
         <button id="btnLimpiar" class="btn ghost">Limpiar</button>
         <button id="btnWhatsApp" class="btn primary xl">Enviar por WhatsApp 💬</button>
       </div>
@@ -132,31 +230,269 @@
     <div class="container"><p>© 2025 Tecno+ Montería — Negro · Rojo · Blanco — Atención inmediata por WhatsApp.</p></div>
   </footer>
 
-  <script type="module">
-    const fmtCOP = (n) => new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 }).format(n);
-    const slug = (s) => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\w]+/g, "-");
-    const save = (k, v) => localStorage.setItem(k, JSON.stringify(v));
-    const load = (k, d=[]) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } };
+  <script>
+    function fmtCOP(n){ return new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',maximumFractionDigits:0}).format(n); }
+    function slug(s){ return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^\w]+/g,'-'); }
+    function save(k,v){ localStorage.setItem(k, JSON.stringify(v)); }
+    function load(k,d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch(e){ return d; } }
 
-    const PLACEHOLDER_SVG = `data:image/svg+xml;utf8,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'>
-      <defs><linearGradient id='g' x1='0' x2='1'><stop stop-color='%230a0a0a'/><stop offset='1' stop-color='%23141414'/></linearGradient></defs>
-      <rect width='100%' height='100%' fill='url(%23g)'/>
-      <g fill='none' stroke='%23e60000' stroke-width='6'>
-        <rect x='130' y='40' rx='34' ry='34' width='140' height='320'/>
-        <circle cx='200' cy='78' r='6' stroke='%23fff'/>
-      </g>
-      <text x='200' y='360' font-family='Arial, Helvetica, sans-serif' font-size='20' fill='%23e6e6e6' text-anchor='middle'>iPhone</text>
-    </svg>`)}`;
+    const MEDIOS = [
+      { key: 'contado',      label: 'Contado' },
+      { key: 'addi',         label: 'Addis' },
+      { key: 'sistecredito', label: 'Sistecredito' },
+      { key: 'brilla',       label: 'Brilla' },
+      { key: 'banco',        label: 'Banco de Bogotá' }
+    ];
+    const labelMedio = (k) => (MEDIOS.find(m=>m.key===k)||{label:k}).label;
 
     const CATALOGO = [
-      {nombre: 'iPhone SE 64GB (2ª Gen) – semi-nuevo', estado: 'semi-nuevo', img: PLACEHOLDER_SVG, stock: 6, precios: { contado: 600000, addi: 702000,  sistecredito: 810000,  banco: 900000 }},
-      {nombre: 'iPhone XR 128GB – semi-nuevo',         estado: 'semi-nuevo', img: PLACEHOLDER_SVG, stock: 4, precios: { contado: 950000, addi: 1111500, sistecredito: 1282500, banco: 1250000 }},
-      {nombre: 'iPhone 11 64GB – semi-nuevo',          estado: 'semi-nuevo', img: PLACEHOLDER_SVG, stock: 8, precios: { contado: 990000, addi: 1158300, sistecredito: 1336500, banco: 1290000 }},
-      {nombre: 'iPhone 11 128GB – semi-nuevo',         estado: 'semi-nuevo', img: PLACEHOLDER_SVG, stock: 5, precios: { contado: 1290000, addi: 1509300, sistecredito: 1741500, banco: 1590000 }},
-      {nombre: 'iPhone 13 128GB – semi-nuevo',         estado: 'semi-nuevo', img: PLACEHOLDER_SVG, stock: 7, precios: { contado: 1650000, addi: 1930500, sistecredito: 2227500, banco: 1950000 }},
-      {nombre: 'iPhone 13 128GB – nuevo',              estado: 'nuevo',      img: PLACEHOLDER_SVG, stock: 6, precios: { contado: 2350000, addi: 2749500, sistecredito: 3172500, banco: 2650000 }},
-      {nombre: 'iPhone 13 Pro 128GB – semi-nuevo',     estado: 'semi-nuevo', img: PLACEHOLDER_SVG, stock: 3, precios: { contado: 2100000, addi: 2457000, sistecredito: 2835000, banco: 2400000 }},
-      {nombre: 'iPhone 13 Pro 256GB – semi-nuevo',     estado: 'semi-nuevo', img: PLACEHOLDER_SVG, stock: 3, precios: { contado: 2700000, addi: 3159000, sistecredito: 3645000, banco: 3000000 }},
-      {nombre: 'iPhone 14 128GB – semi-nuevo',         estado: 'semi-nuevo', img: PLACEHOLDER_SVG, stock: 6, precios: { contado: 1990000, addi: 2328300, sistecredito: 2686500, banco: 2290000 }},
-      {nombre: 'iPhone 14 128GB – nuevo',              estado: 'nuevo',      img: PLACEHOLDER_SVG, stock: 5, precios: { contado: 2890000, addi: 3381300, sistecredito: 3901500, banco: 3190000 }},
-      {nombre: 'iPhone 14 Pro Max 128GB – semi-nuevo', estado: 'semi-nuevo', img: PLACEHOLDER_SVG, stock: 2
+      { nombre: 'iPhone SE 64GB (2ª Gen)', estado: 'semi-nuevo', precios: { contado: 600000, addi: 702000,  sistecredito: 810000, brilla: 708000, banco: 900000 } },
+      { nombre: 'iPhone XR 128GB',         estado: 'semi-nuevo', precios: { contado: 950000, addi: 1111500, sistecredito: 1282500, brilla: 1121000, banco: 1250000 } },
+      { nombre: 'iPhone 11 64GB',          estado: 'semi-nuevo', precios: { contado: 990000, addi: 1158300, sistecredito: 1336500, brilla: 1168000, banco: 1290000 } },
+      { nombre: 'iPhone 11 128GB',         estado: 'semi-nuevo', precios: { contado: 1290000, addi: 1509300, sistecredito: 1741500, brilla: 1520000, banco: 1590000 } },
+      { nombre: 'iPhone 13 128GB',         estado: 'semi-nuevo', precios: { contado: 1650000, addi: 1930500, sistecredito: 2227500, brilla: 1947000, banco: 1950000 } },
+
+      { nombre: 'iPhone 13 128GB',         estado: 'nuevo',      precios: { contado: 2350000, addi: 2749500, sistecredito: 3172500, brilla: 2773000, banco: 2650000 } },
+      { nombre: 'iPhone 13 Pro 128GB',     estado: 'semi-nuevo', precios: { contado: 2100000, addi: 2457000, sistecredito: 2835000, brilla: 2478000, banco: 2400000 } },
+      { nombre: 'iPhone 13 Pro 256GB',     estado: 'semi-nuevo', precios: { contado: 2700000, addi: 3159000, sistecredito: 3645000, brilla: 3186000, banco: 3000000 } },
+      { nombre: 'iPhone 14 128GB',         estado: 'semi-nuevo', precios: { contado: 1990000, addi: 2328300, sistecredito: 2686500, brilla: 2348000, banco: 2290000 } },
+      { nombre: 'iPhone 14 128GB',         estado: 'nuevo',      precios: { contado: 2890000, addi: 3381300, sistecredito: 3901500, brilla: 3406000, banco: 3190000 } },
+      { nombre: 'iPhone 14 Pro Max 128GB', estado: 'semi-nuevo', precios: { contado: 2990000, addi: 3498300, sistecredito: 4036500, brilla: 3528000, banco: 3290000 } },
+      { nombre: 'iPhone 14 Pro Max 256GB', estado: 'semi-nuevo', precios: { contado: 3190000, addi: 3732300, sistecredito: 4306500, brilla: 3764000, banco: 3490000 } },
+      { nombre: 'iPhone 15 Pro Max 256GB', estado: 'semi-nuevo', precios: { contado: 3690000, addi: 4317300, sistecredito: 4981500, brilla: 4358000, banco: 3990000 } },
+      { nombre: 'iPhone 15 Pro Max 512GB', estado: 'semi-nuevo', precios: { contado: 3990000, addi: 4668300, sistecredito: 5386500, brilla: 4715000, banco: 4290000 } },
+
+      { nombre: 'iPhone 16 128GB',         estado: 'nuevo',      precios: { contado: 3490000, addi: 4083300, sistecredito: 4711500, brilla: 4120000, banco: 3790000 } },
+      { nombre: 'iPhone 16 Pro 256GB',     estado: 'nuevo',      precios: { contado: 4600000, addi: 5382000, sistecredito: 6210000, brilla: 5428000, banco: 4900000 } },
+      { nombre: 'iPhone 16 Pro Max 256GB', estado: 'nuevo',      precios: { contado: 4990000, addi: 5838300, sistecredito: 6736500, brilla: 5895000, banco: 5290000 } },
+      { nombre: 'iPhone 16 Pro Max 512GB', estado: 'nuevo',      precios: { contado: 5990000, addi: 7008300, sistecredito: 8086500, brilla: 7078000, banco: 6290000 } }
+    ];
+
+    const STORAGE_KEY = 'tecnoplus_cart_tabla_brilla_v1';
+    const WA_BASE = 'https://wa.me/573043547935';
+
+    const $tbody = document.getElementById('tbody');
+    const $buscador = document.getElementById('buscador');
+    const $filtroEstado = document.getElementById('filtroEstado');
+    const $orden = document.getElementById('orden');
+    const $quoteEmpty = document.getElementById('quoteEmpty');
+    const $quoteItems = document.getElementById('quoteItems');
+    const $quoteTotal = document.getElementById('quoteTotal');
+    const $montoTotal = document.getElementById('montoTotal');
+    const $montoNeto = document.getElementById('montoNeto');
+    const $tradeDesc = document.getElementById('tradeDesc');
+    const $tradeValue = document.getElementById('tradeValue');
+
+    let state = {
+      query: '',
+      estado: 'todos',
+      orden: 'alpha',
+      cart: load(STORAGE_KEY, []),
+      tradeDesc: '',
+      tradeValue: 0
+    };
+
+    function tienePrecio(p, medio){
+      const v = p.precios && p.precios[medio];
+      return typeof v === 'number' && v > 0;
+    }
+
+    function filtrar(){
+      let lista = CATALOGO.filter(p=>{
+        const txt = (p.nombre + ' ' + p.estado).toLowerCase();
+        const okTxt = txt.includes(state.query);
+        const okEstado = state.estado === 'todos' ? true : p.estado === state.estado;
+        return okTxt && okEstado;
+      });
+      if(state.orden === 'precio'){
+        lista.sort((a,b)=>(a.precios?.contado||1e15)-(b.precios?.contado||1e15));
+      }else{
+        lista.sort((a,b)=>a.nombre.localeCompare(b.nombre));
+      }
+      return lista;
+    }
+
+    const tdPrecio = (val) =>
+      (typeof val === 'number' && val>0)
+        ? `<td class="td-right">${fmtCOP(val)}</td>`
+        : `<td class="td-right na">—</td>`;
+
+    function opcionesMedio(p){
+      return MEDIOS.map(m=>{
+        const disp = tienePrecio(p,m.key);
+        return `<option value="${m.key}" ${!disp?'disabled':''}>${m.label}${!disp?' (no aplica)':''}</option>`;
+      }).join('');
+    }
+
+    function renderTabla(){
+      const lista = filtrar();
+      $tbody.innerHTML = '';
+      for(const p of lista){
+        const id = slug(p.nombre + '-' + p.estado);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${p.nombre}</strong></td>
+          <td><span class="pill ${p.estado==='semi-nuevo'?'red':''}">${p.estado}</span></td>
+          ${tdPrecio(p.precios.contado)}
+          ${tdPrecio(p.precios.addi)}
+          ${tdPrecio(p.precios.sistecredito)}
+          ${tdPrecio(p.precios.brilla)}
+          ${tdPrecio(p.precios.banco)}
+          <td class="td-right">
+            <input id="q-${id}" type="number" min="1" max="99" value="1"
+              style="width:64px;background:#151515;color:#fff;border:1px solid var(--borde);border-radius:8px;padding:.4rem;text-align:center" />
+          </td>
+          <td>
+            <select id="m-${id}" style="background:#151515;color:#fff;border:1px solid var(--borde);border-radius:8px;padding:.45rem .5rem;min-width:160px">
+              ${opcionesMedio(p)}
+            </select>
+          </td>
+          <td><button class="btn primary" data-add="${id}">Agregar</button></td>
+        `;
+        $tbody.appendChild(tr);
+
+        tr.querySelector(`[data-add="${id}"]`).addEventListener('click', ()=>{
+          const qty = clamp(tr.querySelector(`#q-${id}`).value, 99);
+          const medio = tr.querySelector(`#m-${id}`).value;
+          const precio = p.precios?.[medio] ?? 0;
+          if(!(typeof precio === 'number' && precio>0)){
+            alert('Este medio de pago no tiene valor configurado. Elige otro.');
+            return;
+          }
+          addToCart({ nombre:p.nombre, estado:p.estado, medio, precio, cantidad:qty });
+          const btn = tr.querySelector(`[data-add="${id}"]`);
+          const old = btn.textContent; btn.textContent = 'Agregado ✓'; btn.style.background = 'var(--ok)';
+          setTimeout(()=>{ btn.textContent = old; btn.style.background = ''; }, 900);
+        });
+      }
+    }
+
+    function clamp(v,max){
+      let n = parseInt(v||'1',10);
+      if(isNaN(n) || n<1) n=1;
+      if(max && n>max) n=max;
+      return n;
+    }
+
+    function addToCart({nombre,estado,medio,precio,cantidad}){
+      const key = slug(`${nombre}-${estado}-${medio}`);
+      const idx = state.cart.findIndex(x=>x.key===key);
+      if(idx>=0){
+        state.cart[idx].cantidad += cantidad;
+      }else{
+        state.cart.push({ key, nombre, estado, medio, precio, cantidad });
+      }
+      save(STORAGE_KEY, state.cart);
+      renderCart();
+    }
+
+    function removeFromCart(key){
+      state.cart = state.cart.filter(x=>x.key!==key);
+      save(STORAGE_KEY, state.cart);
+      renderCart();
+    }
+
+    function clearCart(){
+      state.cart = [];
+      save(STORAGE_KEY, state.cart);
+      renderCart();
+    }
+
+    function renderCart(){
+      if(!state.cart.length){
+        $quoteEmpty.hidden = false;
+        $quoteItems.hidden = true;
+        $quoteTotal.hidden = true;
+        $quoteItems.innerHTML = '';
+        $montoTotal.textContent = fmtCOP(0);
+        $montoNeto.textContent = fmtCOP(Math.max(0, 0 - (state.tradeValue||0)));
+        return;
+      }
+      $quoteEmpty.hidden = true;
+      $quoteItems.hidden = false;
+      $quoteTotal.hidden = false;
+      $quoteItems.innerHTML = '';
+      let total = 0;
+      for(const it of state.cart){
+        const sub = it.precio * it.cantidad;
+        total += sub;
+        const row = document.createElement('div');
+        row.className = 'item';
+        row.innerHTML = `
+          <div>
+            <div class="name">${it.nombre}</div>
+            <div class="muted">Medio: ${labelMedio(it.medio)} · ${it.estado}</div>
+          </div>
+          <div class="right">${it.cantidad} u.</div>
+          <div class="right">${fmtCOP(it.precio)}</div>
+          <div class="right">
+            <strong>${fmtCOP(sub)}</strong>
+            <div class="rm" role="button" title="Quitar">Eliminar</div>
+          </div>
+        `;
+        row.querySelector('.rm').addEventListener('click', ()=>removeFromCart(it.key));
+        $quoteItems.appendChild(row);
+      }
+      $montoTotal.textContent = fmtCOP(total);
+      const neto = Math.max(0, total - (state.tradeValue||0));
+      $montoNeto.textContent = fmtCOP(neto);
+    }
+
+    function enviarWhatsApp(){
+      if(!state.cart.length){
+        alert('Agrega productos a la cotización.');
+        return;
+      }
+      const lines = [];
+      lines.push('📱 *Cotización Tecno+ Montería*');
+      lines.push('');
+      for(const it of state.cart){
+        const sub = it.precio * it.cantidad;
+        lines.push(`• ${it.nombre} (${it.estado})`);
+        lines.push(`   Medio: ${labelMedio(it.medio)} | Cant: ${it.cantidad} | Unit: ${fmtCOP(it.precio)} | Subtotal: ${fmtCOP(sub)}`);
+      }
+      const total = state.cart.reduce((a,i)=>a+i.precio*i.cantidad,0);
+      lines.push('');
+      lines.push(`💰 *Total:* ${fmtCOP(total)}`);
+      if(state.tradeValue && state.tradeValue>0){
+        lines.push(`📦 Celular recibido: ${state.tradeDesc || 'Sin descripción'} (${fmtCOP(state.tradeValue)})`);
+        lines.push(`🧮 Total neto: ${fmtCOP(Math.max(0, total - state.tradeValue))}`);
+      }
+      lines.push('');
+      lines.push('📍 Enviado desde la web de Tecno+');
+
+      const texto = encodeURIComponent(lines.join('\n'));
+      window.location.href = `${WA_BASE}?text=${texto}`;
+    }
+
+    // eventos
+    $buscador.addEventListener('input', e=>{
+      state.query = e.target.value.trim().toLowerCase();
+      renderTabla();
+    });
+    $filtroEstado.addEventListener('change', e=>{
+      state.estado = e.target.value;
+      renderTabla();
+    });
+    $orden.addEventListener('change', e=>{
+      state.orden = e.target.value;
+      renderTabla();
+    });
+    document.getElementById('btnWhatsApp').addEventListener('click', enviarWhatsApp);
+    document.getElementById('btnLimpiar').addEventListener('click', clearCart);
+    $tradeDesc.addEventListener('input', e=>{
+      state.tradeDesc = e.target.value;
+    });
+    $tradeValue.addEventListener('input', e=>{
+      const v = parseInt(e.target.value||'0',10);
+      state.tradeValue = isNaN(v)?0:v;
+      renderCart();
+    });
+
+    // init
+    renderTabla();
+    renderCart();
+  </script>
+</body>
+</html>
+
