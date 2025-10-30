@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tecno+ | Arma tu cotización</title>
+  <meta name="description" content="Landing para armar cotización: precios por medio de pago, simulación con parte de pago y envío por WhatsApp." />
+  <style>
+    :root{ --negro:#0b0b0b; --negro-2:#141414; --gris:#101010; --borde:#222; --blanco:#fff; --texto:#e6e6e6; --muted:#bdbdbd; --rojo:#e60000; --rojo-2:#b00000; --ok:#2ecc71 }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{font-family:system-ui,-apple-system,Roboto,Arial,sans-serif;background:#000;color:var(--texto)}
+    .container{max-width:1200px;margin:auto;padding:0 16px}
+    .navbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:rgba(0,0,0,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--borde)}
+    .brand{display:flex;align-items:center;gap:.6rem}
+    .brand-logo{width:36px;height:36px;border-radius:10px;background:radial-gradient(70% 60% at 50% 40%, rgba(230,0,0,.3), transparent 60%),linear-gradient(135deg,#1a1a1a,#0c0c0c);display:grid;place-items:center;font-weight:800;color:#fff}
+    .brand-text{font-size:1.2rem;color:var(--blanco)} .accent{color:var(--rojo)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border-radius:10px;padding:.55rem .9rem;font-weight:700;text-decoration:none;cursor:pointer;border:1px solid transparent;transition:.2s ease;user-select:none}
+    .btn.primary{background:var(--rojo);color:var(--blanco)} .btn.primary:hover{background:var(--rojo-2);transform:translateY(-1px)}
+    .btn.ghost{background:transparent;color:var(--blanco);border-color:var(--borde)} .btn.ghost:hover{border-color:var(--rojo)}
+    .btn.xl{padding:.85rem 1.2rem;font-size:1.02rem}
+    .controls{border-bottom:1px solid var(--borde);background:var(--negro-2)}
+    .controls .container{display:grid;grid-template-columns:1fr 180px 180px;gap:12px;padding:12px 16px}
+    .control{display:flex;flex-direction:column;gap:6px}
+    .control label{font-size:.85rem;color:var(--muted)}
+    .control input,.control select{background:#151515;color:#fff;border:1px solid var(--borde);border-radius:10px;padding:.55rem .7rem;outline:none}
+    .table-wrap{padding:14px 0}
+    .table-scroll{overflow:auto;border:1px solid var(--borde);border-radius:14px}
+    table{width:100%;border-collapse:separate;border-spacing:0;background:var(--gris);color:var(--texto);min-width:1040px}
+    thead th{position:sticky;top:0;background:#121212;border-bottom:1px solid var(--borde);font-size:.86rem;text-align:left;padding:10px;color:#fff}
+    tbody td{border-bottom:1px solid #1e1e1e;padding:10px;font-size:.95rem}
+    tbody tr:hover{background:#161616}
+    .th-right,.td-right{text-align:right}
+    .pill{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid var(--borde);background:#161616;font-size:.8rem}
+    .pill.red{border-color:var(--rojo);color:#ffd7d7}
+    .muted{color:#c9c9c9}
+    .na{color:#777;font-style:italic}
+    .quote{padding:20px 0;border-top:1px solid var(--borde);background:#0a0a0a}
+    .quote-card{background:#111;border:1px solid var(--borde);border-radius:16px;padding:12px}
+    .quote-empty{padding:18px;text-align:center;color:#cfcfcf}
+    .quote-items{display:flex;flex-direction:column;gap:8px}
+    .item{display:grid;grid-template-columns:1fr 80px 120px 140px;gap:10px;align-items:center;background:#121212;border:1px solid var(--borde);border-radius:12px;padding:10px}
+    .item .name{font-weight:700}
+    .item .right{text-align:right}
+    .item .rm{cursor:pointer;color:#ffb0b0}
+    .item .rm:hover{color:#ff6b6b}
+    .quote-total{margin-top:12px;border-top:1px dashed var(--borde);padding-top:10px}
+    .quote-total .row{display:flex;justify-content:space-between;align-items:center}
+    .note{color:#cfcfcf;font-size:.85rem;margin:.5rem 0 0}
+    .footer{border-top:1px solid var(--borde);padding:16px 0;background:#000;color:#bdbdbd}
+    @media (max-width:900px){.controls .container{grid-template-columns:1fr 1fr}}
+    @media (max-width:640px){.item{grid-template-columns:1fr 70px 100px 90px}}
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="brand">
+      <div class="brand-logo">T+</div>
+      <span class="brand-text"><strong class="accent">Tecno</strong>+</span>
+    </div>
+    <nav class="actions">
+      <a href="#inventario" class="btn ghost">Inventario</a>
+      <a href="#cotizacion" class="btn primary">Ver cotización</a>
+    </nav>
+  </header>
+  <section class="controls" aria-label="Controles del inventario">
+    <div class="container">
+      <div class="control">
+        <label for="buscador">Buscar modelo</label>
+        <input id="buscador" type="search" placeholder="Ej. iPhone 13, Pro Max, 128GB…" />
+      </div>
+      <div class="control">
+        <label for="filtroEstado">Condición</label>
+        <select id="filtroEstado">
+          <option value="todos">Todos</option>
+          <option value="nuevo">Nuevo</option>
+          <option value="semi-nuevo">Semi-nuevo</option>
+        </select>
+      </div>
+      <div class="control">
+        <label for="orden">Ordenar</label>
+        <select id="orden">
+          <option value="alpha">A → Z</option>
+          <option value="precio">Precio Contado</option>
+        </select>
+      </div>
+    </div>
+  </section>
+  <main id="inventario" class="container" aria-live="polite">
+    <h2 style="margin:14px 0 8px">Inventario Tecno+ (arma tu cotización)</h2>
+    <div class="table-wrap">
+      <div class="table-scroll">
+        <table aria-describedby="legend">
+          <thead>
+            <tr>
+              <th>Equipo</th>
+              <th>Condición</th>
+              <th class="th-right">Stock</th>
+              <th class="th-right">Contado</th>
+              <th class="th-right">Addis</th>
+              <th class="th-right">Sistecredito</th>
+              <th class="th-right">Banco de Bogotá</th>
+              <th class="th-right">Cant.</th>
+              <th>Medio de pago</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <p id="legend" class="muted" style="margin:8px 4px 0">La tabla respeta los valores por medio de pago. Donde no hay valor configurado, aparece "—" y el medio queda deshabilitado.</p>
+    </div>
+  </main>
+  <aside id="cotizacion" class="quote">
+    <div class="container">
+      <h2>Cotización</h2>
+      <div id="resumen" class="quote-card">
+        <div class="quote-empty" id="quoteEmpty">Aún no has agregado productos.</div>
+        <div class="quote-items" id="quoteItems" hidden></div>
+        <div class="quote-total" id="quoteTotal" hidden>
+          <div class="row"><span>Total</span><strong id="montoTotal">$0</strong></div>
+          <p class="note">Cada ítem usa el precio según el medio elegido.</p>
+        </div>
+        <div id="tradeinBox" style="margin-top:14px;display:grid;gap:8px;background:#0f0f0f;border:1px solid var(--borde);border-radius:12px;padding:10px 10px 6px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+            <strong>Celular tomado en parte de pago</strong>
+            <small class="muted">(Opcional · ingresa el valor a descontar)</small>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <input id="tradeDesc" type="text" placeholder="Ej. iPhone 11 64GB usado" style="flex:1;min-width:160px;background:#151515;color:#fff;border:1px solid var(--borde);border-radius:8px;padding:.45rem .6rem" />
+            <input id="tradeValue" type="number" min="0" step="10000" placeholder="Valor a descontar" style="width:170px;background:#151515;color:#fff;border:1px solid var(--borde);border-radius:8px;padding:.45rem .6rem" />
+          </div>
+          <div class="row" style="margin-top:4px">
+            <span>Total neto a pagar</span>
+            <strong id="montoNeto">$0</strong>
+          </div>
+        </div>
+      </div>
+      <div class="quote-actions" style="margin-top:10px;display:flex;gap:8px">
+        <button id="btnLimpiar" class="btn ghost">Limpiar</button>
+        <button id="btnWhatsApp" class="btn primary xl">Enviar por WhatsApp 💬</button>
+      </div>
+    </div>
+  </aside>
+  <footer class="footer">
+    <div class="container"><p>© 2025 Tecno+ Montería — Negro · Rojo · Blanco — Atención inmediata por WhatsApp.</p></div>
+  </footer>
+  <script type="module">
+    const fmtCOP = (n) => new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(n);
+    const slug = (s) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace([^\w]+/g, '-');
+    const save = (k, v) => localStorage.setItem(k, JSON.stringify(v));
+    const load = (k, d=[]) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } };
+    const MEDIOS = [
+      { key: 'contado', label: 'Contado' },
+      { key: 'addi', label: 'Addis' },
+      { key: 'sistecredito', label: 'Sistecredito' },
+      { key: 'banco', label: 'Banco de Bogotá' }
+    ];
+    const labelMedio = (k) => (MEDIOS.find(m=>m.key===k)||{label:k}).label;
+    const CATALOGO = [
+      { nombre: 'iPhone SE 64GB (2ª Gen)', estado: 'semi-nuevo', stock: 6, precios: { contado: 600000, addi: 702000,  sistecredito: 810000,  banco: 900000 } },
+      { nombre: 'iPhone XR 128GB',         estado: 'semi-nuevo', stock: 4, precios: { contado: 950000, addi: 1111500, sistecredito: 1282500, banco: 1250000 } },
+      { nombre: 'iPhone 11 64GB',          estado: 'semi-nuevo', stock: 8, precios: { contado: 990000, addi: 1158300, sistecredito: 1336500, banco: 1290000 } },
+      { nombre: 'iPhone 11 128GB',         estado: 'semi-nuevo', stock: 5, precios: { contado: 1290000, addi: 1509300, sistecredito: 1741500, banco: 1590000 } },
+      { nombre: 'iPhone 13 128GB',         estado: 'semi-nuevo', stock: 7, precios: { contado: 1650000, addi: 1930500, sistecredito: 2227500, banco: 1950000 } },
+      { nombre: 'iPhone 13 128GB',         estado: 'nuevo',      stock: 6, precios: { contado: 2350000, addi: 2749500, sistecredito: 3172500, banco: 2650000 } },
+      { nombre: 'iPhone 13 Pro 128GB',     estado: 'semi-nuevo', stock: 3, precios: { contado: 2100000, addi: 2457000, sistecredito: 2835000, banco: 2400000 } },
+      { nombre: 'iPhone 13 Pro 256GB',     estado: 'semi-nuevo', stock: 3, precios: { contado: 2700000, addi: 3159000, sistecredito: 3645000, banco: 3000000 } },
+      { nombre: 'iPhone 14 128GB',         estado: 'semi-nuevo', stock: 6, precios: { contado: 1990000, addi: 2328300, sistecredito: 2686500, banco: 2290000 } },
+      { nombre: 'iPhone 14 128GB',         estado: 'nuevo',      stock: 5, precios: { contado: 2890000, addi: 3381300, sistecredito: 3901500, banco: 3190000 } },
+      { nombre: 'iPhone 14 Pro Max 128GB', estado: 'semi-nuevo', stock: 2, precios: { contado: 2990000, addi: 3498300, sistecredito: 4036500, banco: 3290000 } },
+      { nombre: 'iPhone 14 Pro Max 256GB', estado: 'semi-nuevo', stock: 2, precios: { contado: 3190000, addi: 3732300, sistecredito: 4306500, banco: 3490000 } },
+      { nombre: 'iPhone 15 Pro Max 256GB', estado: 'semi-nuevo', stock: 4, precios: { contado: 3690000, addi: 4317300, sistecredito: 4981500, banco: 3990000 } },
+      { nombre: 'iPhone 15 Pro Max 512GB', estado: 'semi-nuevo', stock: 2, precios: { contado: 3990000, addi: 4668300, sistecredito: 5386500, banco: 4290000 } },
+      { nombre: 'iPhone 16 128GB',         estado: 'nuevo',      stock: 6, precios: { contado: 3490000, addi: 4083300, sistecredito: 4711500, banco: 3790000 } },
+      { nombre: 'iPhone 16 Pro 256GB',     estado: '
