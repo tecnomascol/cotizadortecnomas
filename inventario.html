@@ -147,7 +147,7 @@
   </footer>
   <script type="module">
     const fmtCOP = (n) => new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(n);
-    const slug = (s) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace([^\w]+/g, '-');
+    const slug = (s) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\w]+/g, '-');
     const save = (k, v) => localStorage.setItem(k, JSON.stringify(v));
     const load = (k, d=[]) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } };
     const MEDIOS = [
@@ -173,4 +173,4 @@
       { nombre: 'iPhone 15 Pro Max 256GB', estado: 'semi-nuevo', stock: 4, precios: { contado: 3690000, addi: 4317300, sistecredito: 4981500, banco: 3990000 } },
       { nombre: 'iPhone 15 Pro Max 512GB', estado: 'semi-nuevo', stock: 2, precios: { contado: 3990000, addi: 4668300, sistecredito: 5386500, banco: 4290000 } },
       { nombre: 'iPhone 16 128GB',         estado: 'nuevo',      stock: 6, precios: { contado: 3490000, addi: 4083300, sistecredito: 4711500, banco: 3790000 } },
-      { nombre: 'iPhone 16 Pro 256GB',     estado: '
+      { nombre: 'iPhone
